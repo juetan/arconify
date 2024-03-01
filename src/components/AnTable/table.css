@@ -1,0 +1,24 @@
+.an-table .an-table-header {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.an-table .an-table-actions {
+  flex: 1;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.an-table .an-table-widgets {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.an-table-search-inline .arco-form-item {
+  margin-bottom: 0;
+}
+.an-table-search-inline .arco-form-item:last-child {
+  margin-right: 0;
+}
