@@ -1,5 +1,6 @@
-import { Component, reactive } from 'vue'
-import { AnFormItemPropsBase, AnFormItemSlot, AnFormItemFnProps } from '../FormItem'
+import type { Component } from 'vue'
+import { reactive } from 'vue'
+import { AnFormItemFnProps, AnFormItemPropsBase, AnFormItemSlot } from '../FormItem'
 import { Recordable } from '../util'
 
 export interface ItemSetter<P extends object, S extends string> {

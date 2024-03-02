@@ -1,8 +1,8 @@
 import { defaultsDeep } from 'lodash-es'
+import { Ref, computed, reactive, ref } from 'vue'
 import { AnFormModal, AnFormModalInstance, AnFormModalProps } from './FormModal'
 import { useFormProps } from './useForm'
 import { FormItem } from './useFormItems'
-import { ref, computed, reactive } from 'vue'
 import { Recordable } from './util'
 
 export type FormModalUseOptions = Partial<Omit<AnFormModalProps, 'items'>> & {
@@ -41,11 +41,14 @@ export function useFormModalProps(options: FormModalUseOptions): AnFormModalProp
   }
 }
 
-export function useFormModal(options: FormModalUseOptions) {
+export type UseFormModalOptionsFn = (modalRef: Ref<AnFormModalInstance | null>) => FormModalUseOptions
+
+export function useAnFormModal(options: FormModalUseOptions | UseFormModalOptionsFn) {
   const modalRef = ref<AnFormModalInstance | null>(null)
   const formRef = computed(() => modalRef.value?.anFormRef)
   const open = (data: Recordable = {}) => modalRef.value?.open(data)
-  const rawProps = useFormModalProps(options)
+  const option = typeof options === 'function' ? options(modalRef) : options
+  const rawProps = useFormModalProps(option)
   const props = reactive(rawProps)
 
   return {
@@ -62,8 +65,8 @@ export function useFormModal(options: FormModalUseOptions) {
           modalSlots={props.modalSlots}
           model={props.model}
           items={props.items}
-          formProps={props.formProps}
           submit={props.submit}
+          formProps={props.formProps}
           onUpdate:model={model => ((props as any).model = model)}
         ></AnFormModal>
       )

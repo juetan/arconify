@@ -1,10 +1,10 @@
 import { Button, ButtonInstance, FormInstance, Message, Modal } from '@arco-design/web-vue'
 import { useVModel } from '@vueuse/core'
-import { InjectionKey, PropType, Ref, defineComponent, ref, provide, nextTick } from 'vue'
-import { getModel, setModel } from './util'
+import { cloneDeep } from 'lodash-es'
+import { InjectionKey, PropType, Ref, defineComponent, nextTick, provide, ref } from 'vue'
 import { AnForm, AnFormInstance, AnFormSubmit } from './Form'
 import { AnFormItemProps } from './FormItem'
-import { cloneDeep } from 'lodash-es'
+import { Recordable, getModel, setModel } from './util'
 
 export interface AnFormModalContext {
   visible: Ref<boolean>
@@ -13,12 +13,10 @@ export interface AnFormModalContext {
   submitForm: () => any | Promise<any>
   open: (data: Recordable) => void
   close: () => void
-  modalTrigger: () => any
-  onClose: () => void
+  AnTrigger: () => any
 }
 
 export const AnFormModalContextKey = Symbol('AnFormModalContextKey') as InjectionKey<AnFormModalContext>
-type Recordable = Record<string, any>
 
 /**
  * 表单组件
@@ -122,7 +120,7 @@ export const AnFormModal = defineComponent({
     const visible = ref(false)
     const loading = ref(false)
 
-    const modalTrigger = () => {
+    const AnTrigger = () => {
       if (!props.trigger) {
         return null
       }
@@ -155,7 +153,7 @@ export const AnFormModal = defineComponent({
     }
 
     const submitForm = async () => {
-      if (await anFormRef.value?.validate()) {
+      if (await anFormRef.value?.formRef?.validate()) {
         return
       }
       try {
@@ -185,17 +183,14 @@ export const AnFormModal = defineComponent({
       visible.value = false
     }
 
-    const onClose = () => {}
-
     const context: AnFormModalContext = {
       visible,
       loading,
       anFormRef,
       open,
       close,
-      onClose,
       submitForm,
-      modalTrigger,
+      AnTrigger,
     }
 
     provide(AnFormModalContextKey, context)
@@ -207,17 +202,8 @@ export const AnFormModal = defineComponent({
   render() {
     return (
       <>
-        <this.modalTrigger></this.modalTrigger>
-        <Modal
-          titleAlign="start"
-          closable={false}
-          maskClosable={false}
-          {...this.modalProps}
-          v-model:visible={this.visible}
-          class="an-form-modal"
-          unmountOnClose={true}
-          onClose={this.onClose}
-        >
+        <this.AnTrigger></this.AnTrigger>
+        <Modal titleAlign="start" closable={false} maskClosable={false} {...this.modalProps} v-model:visible={this.visible} class="an-form-modal" unmountOnClose={true}>
           {{
             footer: this.submit
               ? () => (

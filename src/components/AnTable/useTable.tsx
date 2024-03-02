@@ -1,14 +1,13 @@
-import { useFormModalProps } from '../AnForm'
+import { Button } from '@arco-design/web-vue'
+import { isFunction } from 'lodash-es'
+import { Component, Ref, reactive, ref } from 'vue'
 import { AnTable, AnTableInstance, AnTableProps } from './Table'
+import { UseCreateFormOptions, useCreateForm } from './useCreateForm'
 import { ModifyForm, useModifyForm } from './useModiyForm'
 import { SearchForm, SearchFormItem, useSearchForm } from './useSearchForm'
 import { TableColumn, useTableColumns } from './useTableColumns'
-import { UseCreateFormOptions } from './useCreateForm'
-import { Component, Ref, ref, reactive } from 'vue'
-import { Button } from '@arco-design/web-vue'
-import { isFunction } from 'lodash-es'
 
-export interface UseTableOptions extends Pick<AnTableProps, 'data' | 'tableProps' | 'tableSlots' | 'paging' | 'actions' | 'widgets'> {
+export interface UseAnTableOptions extends Pick<AnTableProps, 'data' | 'tableProps' | 'tableSlots' | 'paging' | 'actions' | 'widgets'> {
   /**
    * 唯一ID
    * @example
@@ -91,16 +90,16 @@ function useButtons(buttons: any[], tableRef: Ref<AnTableInstance | null>) {
   return result
 }
 
-export function useTableProps(options: UseTableOptions, tableRef: Ref<AnTableInstance | null>): AnTableProps {
+export function useTableProps(options: UseAnTableOptions, tableRef: Ref<AnTableInstance | null>): AnTableProps {
   const { data, tableProps = {}, tableSlots } = options
 
   const paging = { hide: false, showTotal: true, showPageSize: true, ...(options.paging ?? {}) }
   const search = options.search && useSearchForm(options.search, [], tableRef)
-  const create = options.create && useFormModalProps(options.create)
+  const create = options.create && useCreateForm(options.create)
   const modify = options.modify && useModifyForm(options, create?.model ?? {}, tableRef)
-  const columns = useTableColumns(options.columns ?? [], tableRef)
   const actions = options.actions && useButtons(options.actions, tableRef)
   const widgets = options.widgets && useButtons(options.widgets, tableRef)
+  const columns = useTableColumns(options.columns ?? [], tableRef)
 
   const onPageChange = tableProps.onPageChange
   const onPageSizeChange = tableProps.onPageSizeChange
@@ -131,30 +130,34 @@ export function useTableProps(options: UseTableOptions, tableRef: Ref<AnTableIns
   return props
 }
 
+type UseAnTableOptionsFn = (tableRef: Ref<AnTableInstance | null>) => UseAnTableOptions
+
 /**
- *
- * @param options
+ * 构建一个表格组件
  * @example
  * ```html
  * <template>
  *  <UserTable></UserTable>
  * </template>
+ *
  * <script lang="ts" setup>
  * const UserTable = useTable({
  *  data() {
- *   },
- *  columns: []
+ *    return [{ name: '测试' }]
+ *  },
+ *  columns: [
+ *   { title: '名字', dataIndex: 'name' }
+ *  ]
  * })
  * <script>
  * ```
  */
-// | ((tableRef: Ref<AnTableInstance | null>) => UseTableOptions)
-export function useAnTable(options: UseTableOptions | ((tableRef: Ref<AnTableInstance | null>) => UseTableOptions)): any {
+export function useAnTable(options: UseAnTableOptions | UseAnTableOptionsFn) {
   const tableRef = ref<AnTableInstance | null>(null)
   const refresh = () => tableRef.value?.refresh()
   const reload = () => tableRef.value?.reload()
 
-  const option: UseTableOptions = isFunction(options) ? options(tableRef) : options
+  const option: UseAnTableOptions = isFunction(options) ? options(tableRef) : options
   const rawProps = useTableProps(option, tableRef)
   const props = reactive(rawProps)
 

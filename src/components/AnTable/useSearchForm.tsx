@@ -1,7 +1,10 @@
 import { defaultsDeep, isArray, merge } from 'lodash-es'
-import { AnFormProps, FormUseOptions, AnFormItemProps, FormItem, useFormItems } from '../AnForm'
+import type { Ref } from 'vue'
+import { AnFormProps } from '../AnForm/Form'
+import { AnFormItemProps } from '../AnForm/FormItem'
+import { FormUseOptions } from '../AnForm/useForm'
+import { FormItem, useFormItems } from '../AnForm/useFormItems'
 import { AnTableInstance } from './Table'
-import { Ref } from 'vue'
 
 export type ExtendFormItem = Partial<
   FormItem & {

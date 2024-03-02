@@ -1,44 +1,8 @@
-import { FormInstance } from '@arco-design/web-vue'
-import { ref } from 'vue'
-
 export type Recordable<T = any> = Record<string, T>
-
-/**
- * 原始表单实例
- */
-export function useFormRef() {
-  const formRef = ref<FormInstance | null>(null)
-
-  type Validate = FormInstance['validate']
-  type ValidateField = FormInstance['validateField']
-  type ResetFields = FormInstance['resetFields']
-  type ClearValidate = FormInstance['clearValidate']
-  type SetFields = FormInstance['setFields']
-  type ScrollToField = FormInstance['scrollToField']
-
-  const validate: Validate = async (...args) => formRef.value?.validate(...args)
-  const validateField: ValidateField = async (...args) => formRef.value?.validateField(...args)
-  const resetFields: ResetFields = (...args) => formRef.value?.resetFields(...args)
-  const clearValidate: ClearValidate = (...args) => formRef.value?.clearValidate(...args)
-  const setFields: SetFields = (...args) => formRef.value?.setFields(...args)
-  const scrollToField: ScrollToField = (...args) => formRef.value?.scrollToField(...args)
-
-  return {
-    formRef,
-    validate,
-    validateField,
-    resetFields,
-    clearValidate,
-    setFields,
-    scrollToField,
-  }
-}
-
-export type FormRef = ReturnType<typeof useFormRef>
+export type MaybePromise<T> = T | Promise<T>
 
 export function getModel(model: Recordable) {
   const data: Recordable = {}
-
   for (const [key, value] of Object.entries(model)) {
     if (value === '') {
       continue
@@ -53,7 +17,6 @@ export function getModel(model: Recordable) {
     }
     data[key] = value
   }
-
   return data
 }
 
@@ -99,30 +62,52 @@ function setModelObject(data: Recordable, key: string) {
 
 function getModelArray(key: string, value: any, data: Recordable) {
   let field = rmString(key)
-
   if (!field) {
     data[key] = value
     return
   }
-
   field.split(',').forEach((key: string, index: string) => {
     data[key] = value?.[index]
   })
-
   return data
 }
 
 function getModelObject(key: string, value: any, data: Recordable) {
   const field = rmString(key)
-
   if (!field) {
     data[key] = value
     return
   }
-
   for (const key of field.split(',')) {
     data[key] = value?.[key]
   }
-
   return data
+}
+
+import { Modal, ModalConfig } from '@arco-design/web-vue'
+import { merge } from 'lodash-es'
+
+export type DelOptions = string | Partial<Omit<ModalConfig, 'onOk' | 'onCancel'>>
+
+export const delOptions: ModalConfig = {
+  title: '提示',
+  titleAlign: 'start',
+  width: 432,
+  content: '危险操作，确定删除该数据吗？',
+  maskClosable: false,
+  closable: false,
+  okText: '确定删除',
+  okButtonProps: {
+    status: 'danger',
+  },
+}
+
+export const delConfirm = (config: DelOptions = {}) => {
+  if (typeof config === 'string') {
+    config = { content: config }
+  }
+  const merged = merge({ content: '' }, delOptions, config)
+  return new Promise<void>((onOk: () => void, onCancel) => {
+    Modal.open({ ...merged, onOk, onCancel })
+  })
 }

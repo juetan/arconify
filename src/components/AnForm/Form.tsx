@@ -1,11 +1,10 @@
 import { Form, FormInstance, Message } from '@arco-design/web-vue'
 import { useVModel } from '@vueuse/core'
-import { ComputedRef, InjectionKey, PropType, Ref, defineComponent, computed, ref, provide, onMounted } from 'vue'
-import { FormRef, useFormRef } from './util'
-import { AnFormItem, AnFormItemProps } from './FormItem'
 import { cloneDeep, isFunction, isObject, merge } from 'lodash-es'
-import { getModel } from './util'
+import { ComputedRef, InjectionKey, PropType, Ref, computed, defineComponent, onMounted, provide, ref } from 'vue'
+import { AnFormItem, AnFormItemProps } from './FormItem'
 import { SetterType, setterMap } from './setters'
+import { Recordable, getModel } from './util'
 
 const SUBMIT_ITEM = {
   field: 'id',
@@ -17,7 +16,8 @@ const SUBMIT_ITEM = {
   setterSlots: {},
 }
 
-export type FormContextInterface = FormRef & {
+export type FormContextInterface = {
+  formRef: Ref<FormInstance | null>
   model: Ref<Recordable>
   items: ComputedRef<AnFormItemProps[]>
   loading: Ref<boolean>
@@ -26,7 +26,6 @@ export type FormContextInterface = FormRef & {
 }
 
 export const FormContextKey = Symbol('FormContextKey') as InjectionKey<FormContextInterface>
-type Recordable = Record<string, any>
 
 /**
  * 表单组件
@@ -91,7 +90,7 @@ export const AnForm = defineComponent({
     const items = computed(() => props.items)
     const initModel = cloneDeep(model.value)
     const loading = ref(false)
-    const { formRef, ...formMethods } = useFormRef()
+    const formRef = ref<FormInstance | null>(null)
 
     const submitItem = (() => {
       if (!props.submit) {
@@ -137,8 +136,8 @@ export const AnForm = defineComponent({
       model,
       items,
       formRef,
-      ...formMethods,
     }
+
     provide(FormContextKey, context)
 
     onMounted(() => {

@@ -1,10 +1,11 @@
 import { FieldRule } from '@arco-design/web-vue'
 import { AnFormItemRule } from './FormItem'
+import { Recordable } from './util'
 
 /**
  * 内置规则
  */
-export const FieldRuleMap = defineRuleMap({
+export const formRuleMap = defineRuleMap({
   required: {
     required: true,
     message: '该项不能为空',
@@ -47,10 +48,14 @@ export const FieldRuleMap = defineRuleMap({
   },
 })
 
+export function addFormRule(name: string, rule: FieldRule) {
+  ;(formRuleMap as Recordable)[name] = rule
+}
+
 /**
  * 字符串形式(枚举)
  */
-export type FieldStringRule = keyof typeof FieldRuleMap
+export type FieldStringRule = keyof typeof formRuleMap
 
 /**
  * 完整类型
@@ -78,13 +83,13 @@ export const useFormRules = <T extends { required?: boolean; rules?: Rule[] }>(i
   }
 
   if (required) {
-    data.push(FieldRuleMap.required)
+    data.push(formRuleMap.required)
   }
 
   for (const rule of rules ?? []) {
     if (typeof rule === 'string') {
-      if (FieldRuleMap[rule]) {
-        data.push(FieldRuleMap[rule])
+      if (formRuleMap[rule]) {
+        data.push(formRuleMap[rule])
       }
     } else {
       data.push(rule)

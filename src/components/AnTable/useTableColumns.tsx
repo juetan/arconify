@@ -1,8 +1,8 @@
-import { Divider, Link, TableColumnData } from '@arco-design/web-vue'
+import { Divider, Link, Message, TableColumnData } from '@arco-design/web-vue'
 import { defaultsDeep } from 'lodash-es'
-import { AnTableInstance } from './Table'
-import { Recordable } from '../AnForm'
 import { Ref } from 'vue'
+import { Recordable, delConfirm, delOptions } from '../AnForm/util'
+import { AnTableInstance } from './Table'
 
 interface TableBaseColumn {
   /**
@@ -52,6 +52,9 @@ interface TableColumnButton {
    * @see ALink
    */
   buttonProps?: Recordable
+  /**
+   * 按钮图标
+   */
   icon?: string
   /**
    * 是否可见
@@ -109,20 +112,9 @@ interface TableDropdownColumn {
   dropdowns: any[]
 }
 
-export type TableColumn = TableColumnData &
-  (TableIndexColumn | TableBaseColumn | TableButtonColumn | TableDropdownColumn) & {
-    /**
-     * 是否可配置
-     * @example
-     * ```ts
-     * true
-     * ```
-     */
-    configable?: boolean
-  }
+export type TableColumn = TableColumnData & (TableIndexColumn | TableBaseColumn | TableButtonColumn | TableDropdownColumn)
 
 function useRowDelete(btn: TableColumnButton, tableRef: Ref<AnTableInstance | null>) {
-  console.log(tableRef)
   const onClick = btn.onClick
   let confirm = btn.confirm ?? {}
   if (typeof confirm === 'string') {
@@ -134,18 +126,16 @@ function useRowDelete(btn: TableColumnButton, tableRef: Ref<AnTableInstance | nu
     },
   })
   btn.onClick = async props => {
-    console.log(props)
-    onClick?.(props)
-    // delConfirm({
-    //   ...delOptions,
-    //   ...confirm,
-    //   async onBeforeOk() {
-    //     const res: any = await onClick?.(props)
-    //     const msg = res?.data?.message
-    //     msg && Message.success(`提示: ${msg}`)
-    //     tableRef.value?.refresh()
-    //   },
-    // })
+    delConfirm({
+      ...delOptions,
+      ...confirm,
+      async onBeforeOk() {
+        const res: any = await onClick?.(props)
+        const msg = res?.data?.message
+        msg && Message.success(`提示: ${msg}`)
+        tableRef.value?.refresh()
+      },
+    })
   }
   return btn
 }

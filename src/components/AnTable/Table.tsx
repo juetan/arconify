@@ -1,10 +1,12 @@
-import { AnForm, AnFormInstance, AnFormModal, AnFormModalInstance, AnFormModalProps, AnFormProps, getModel } from '../AnForm'
 import { PaginationProps, Table, TableColumnData, TableData, TableInstance } from '@arco-design/web-vue'
-import { defineComponent, ref, computed, onMounted, watchEffect } from 'vue'
 import type { PropType } from 'vue'
+import { computed, defineComponent, onMounted, ref, watchEffect } from 'vue'
+import { AnForm, AnFormInstance, AnFormProps } from '../AnForm/Form'
+import { AnFormModal, AnFormModalInstance, AnFormModalProps } from '../AnForm/FormModal'
+import { MaybePromise, getModel } from '../AnForm/util'
 import './table.css'
 
-export type DataFn = (params: { page: number; size: number; [key: string]: any }) => any | Promise<TableData[] | { data: TableData[]; total: number }>
+export type TableDataFn = (params: { page: number; size: number; [key: string]: any }) => MaybePromise<TableData[] | { data: TableData[]; total: number }>
 export type TableColumnRender = (data: { record: TableData; column: TableColumnData; rowIndex: number }) => any
 
 export type ArcoTableProps = Omit<TableInstance['$props'], 'ref' | 'pagination' | 'loading' | 'data'>
@@ -99,7 +101,7 @@ export const AnTable = defineComponent({
      * ```
      */
     data: {
-      type: [Array, Function] as PropType<TableData[] | DataFn>,
+      type: [Array, Function] as PropType<TableData[] | TableDataFn>,
     },
     /**
      * 表格列
@@ -195,7 +197,7 @@ export const AnTable = defineComponent({
       if (!props.data || Array.isArray(props.data)) {
         return
       }
-      if (await searchRef.value?.validate()) {
+      if (await searchRef.value?.formRef?.validate()) {
         return
       }
 
@@ -308,7 +310,7 @@ export const AnTable = defineComponent({
 /**
  * 表格组件实例
  */
-export type AnTableInstance = InstanceType<typeof AnTable>
+export type AnTableInstance = InstanceType<typeof AnTable> & {}
 
 /**
  * 表格组件参数

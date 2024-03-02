@@ -1,9 +1,9 @@
-import { FormItem, FieldRule, FormItemInstance, SelectOptionData, SelectOptionGroup } from '@arco-design/web-vue'
-import { InjectionKey, PropType, provide, defineComponent, computed } from 'vue'
+import { FieldRule, FormItem, FormItemInstance, SelectOptionData, SelectOptionGroup } from '@arco-design/web-vue'
+import { InjectionKey, PropType, computed, defineComponent, provide } from 'vue'
 import { SetterItem, SetterType, setterMap } from './setters'
+import { Recordable } from './util'
 
 export const FormItemContextKey = Symbol('FormItemContextKey') as InjectionKey<AnFormItemFnProps>
-type Recordable = Record<string, any>
 
 /**
  * 表单项
@@ -39,10 +39,10 @@ export const AnFormItem = defineComponent({
 
     const setterSlots = (() => {
       const slots = props.item.setterSlots
+      const items: Recordable = {}
       if (!slots) {
         return null
       }
-      const items: Recordable = {}
       for (const [name, Slot] of Object.entries(slots)) {
         // @ts-ignore
         items[name] = (p: Recordable) => <Slot {...p} {...props} />
@@ -53,6 +53,7 @@ export const AnFormItem = defineComponent({
     const itemSlots = (() => {
       const Setter = setterMap[props.item.setter as SetterType]?.setter as any
       const slots = props.item.itemSlots
+      const items: Recordable = {}
       if (!slots && !Setter) {
         return null
       }
@@ -66,7 +67,6 @@ export const AnFormItem = defineComponent({
           default: SetterRender,
         }
       }
-      const items: Recordable = {}
       for (const [name, Slot] of Object.entries(slots)) {
         items[name] = (p: Recordable) => <Slot {...p} {...props}></Slot>
       }
@@ -132,7 +132,7 @@ export type AnFormItemSlots = {
 export type AnFormItemPropsBase = {
   /**
    * 字段名
-   * @description 字段名唯一，支持特殊语法
+   * @description 字段名唯一，支持特殊语法，如 `[startDate, endDate]`
    * @example
    * ```ts
    * 'username'
@@ -181,10 +181,12 @@ export type AnFormItemPropsBase = {
    * @description 适用于下拉框等组件
    * @example
    * ```ts
-   * [{
-   *   label: '方式1',
-   *   value: 1
-   * }]
+   * [
+   *   {
+   *     label: '方式1',
+   *     value: 1
+   *   }
+   * ]
    * ```
    */
   options?: AnFormItemOption[] | ((args: AnFormItemFnProps) => AnFormItemOption[] | Promise<AnFormItemOption[]>)

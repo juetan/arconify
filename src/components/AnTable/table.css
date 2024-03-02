@@ -16,9 +16,9 @@
   gap: 8px;
   align-items: center;
 }
-.an-table-search-inline .arco-form-item {
+.an-table .an-table-search-inline .arco-form-item {
   margin-bottom: 0;
 }
-.an-table-search-inline .arco-form-item:last-child {
+.an-table .an-table-search-inline .arco-form-item:last-child {
   margin-right: 0;
 }

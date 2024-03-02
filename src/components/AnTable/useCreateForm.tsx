@@ -1,4 +1,4 @@
-import { FormModalUseOptions, useFormModalProps } from '../AnForm'
+import { FormModalUseOptions, useFormModalProps } from '../AnForm/useFormModal'
 
 export type UseCreateFormOptions = FormModalUseOptions & {}
 

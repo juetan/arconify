@@ -1,10 +1,12 @@
-import { AnFormModalProps, FormItem, FormModalUseOptions, useFormModalProps } from '../AnForm'
 import { cloneDeep, defaults, merge } from 'lodash-es'
+import { Ref } from 'vue'
+import { AnFormModalProps } from '../AnForm/FormModal'
+import { FormItem } from '../AnForm/useFormItems'
+import { FormModalUseOptions, useFormModalProps } from '../AnForm/useFormModal'
+import { Recordable } from '../AnForm/util'
 import { AnTableInstance } from './Table'
 import { ExtendFormItem } from './useSearchForm'
-import { UseTableOptions } from './useTable'
-import { Recordable } from '../AnForm'
-import { Ref } from 'vue'
+import { UseAnTableOptions } from './useTable'
 
 export type ModifyForm = Omit<FormModalUseOptions, 'items' | 'trigger'> & {
   /**
@@ -26,7 +28,7 @@ export type ModifyForm = Omit<FormModalUseOptions, 'items' | 'trigger'> & {
   items?: ExtendFormItem[]
 }
 
-export function useModifyForm(options: UseTableOptions, createModel: Recordable, tableRef: Ref<AnTableInstance | null>): AnFormModalProps | undefined {
+export function useModifyForm(options: UseAnTableOptions, createModel: Recordable, tableRef: Ref<AnTableInstance | null>): AnFormModalProps | undefined {
   const { create, modify, columns } = options
 
   if (!modify) {

@@ -2,7 +2,7 @@ import { defaultsDeep, has, merge, omit } from 'lodash-es'
 import { AnFormItemProps, AnFormItemPropsBase } from './FormItem'
 import { SetterItem, setterMap } from './setters'
 import { Rule, useFormRules } from './useFormRules'
-type Recordable = Record<string, any>
+import { Recordable } from './util'
 
 /**
  * 表单项数据
