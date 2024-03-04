@@ -1,6 +1,5 @@
 {
-  "name": "@vexip-ui/docs",
-  "author": "qmhc",
+  "name": "arconify-docs",
   "type": "module",
   "scripts": {
     "build": "vitepress build",
@@ -9,6 +8,7 @@
   },
   "private": true,
   "dependencies": {
+    "@arco-design/web-vue": "^2.54.5",
     "@vexip-ui/bem-helper": "^1.1.0",
     "@vexip-ui/config": "^1.6.0",
     "@vexip-ui/hooks": "^2.4.1",

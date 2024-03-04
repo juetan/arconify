@@ -2,11 +2,10 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import { useData } from 'vitepress'
 import { PenToSquareR } from '@vexip-ui/icons'
 import { format } from '@vexip-ui/utils'
+import { useData } from 'vitepress'
 
-import Contributors from './contributors.vue'
 import PageLinks from './page-links.vue'
 
 import type { ThemeConfig } from '../types'
@@ -36,7 +35,7 @@ const lastUpdated = computed(() => {
 
 <template>
   <div class="page-footer">
-    <Contributors></Contributors>
+    <!-- <Contributors></Contributors> -->
     <div class="page-footer__edit-info">
       <Linker
         v-if="hasEditLink"

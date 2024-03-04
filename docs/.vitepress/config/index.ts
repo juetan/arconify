@@ -1,14 +1,14 @@
+import { toKebabCase } from '@vexip-ui/utils'
 import * as compiler from '@vue/compiler-sfc'
-import { defineConfigWithTheme } from 'vitepress'
 import { compare } from 'compare-versions'
+import { defineConfigWithTheme } from 'vitepress'
 import { highlight } from '../build/highlight'
 import { markdownItSetup } from '../build/markdown'
+import type { AsideMenuTag, ThemeConfig } from '../theme/types'
 import { getComponentConfig } from './component'
 import { getGuideConfig } from './guide'
 import { getHeadConfig } from './head'
 import { getUpdatedFiles } from './updated'
-import { toKebabCase } from '@vexip-ui/utils'
-import type { AsideMenuTag, ThemeConfig } from '../theme/types'
 
 compiler.parseCache.max = 10000
 
@@ -47,56 +47,56 @@ export default async () => {
           link: '/component/button',
           activeMatch: '/component/',
         },
-        {
-          key: 'ecosystem',
-          i18n: 'common.ecosystem',
-          items: [
-            {
-              key: 'official',
-              i18n: 'common.official',
-              items: [
-                {
-                  key: 'create-vexip',
-                  text: 'Create Vexip',
-                  link: 'https://github.com/vexip-ui/create-vexip',
-                },
-                {
-                  key: 'nuxt-module',
-                  text: 'Vexip Nuxt Module',
-                  link: 'https://github.com/vexip-ui/nuxt',
-                },
-                {
-                  key: 'lint-config',
-                  text: 'Vexip Lint Config',
-                  link: 'https://github.com/vexip-ui/lint-config',
-                },
-              ],
-            },
-            {
-              key: 'partnership',
-              i18n: 'common.partnership',
-              items: [
-                {
-                  key: 'fantastic-admin',
-                  text: 'Fantastic-admin',
-                  link: 'https://fantastic-admin.gitee.io/',
-                },
-                {
-                  key: 'become-partner',
-                  i18n: 'common.becomePartner',
-                  link: 'mailto:544022268@qq.com',
-                },
-              ],
-            },
-          ],
-        },
+        // {
+        //   key: 'ecosystem',
+        //   i18n: 'common.ecosystem',
+        //   items: [
+        //     {
+        //       key: 'official',
+        //       i18n: 'common.official',
+        //       items: [
+        //         {
+        //           key: 'create-vexip',
+        //           text: 'Create Vexip',
+        //           link: 'https://github.com/vexip-ui/create-vexip',
+        //         },
+        //         {
+        //           key: 'nuxt-module',
+        //           text: 'Vexip Nuxt Module',
+        //           link: 'https://github.com/vexip-ui/nuxt',
+        //         },
+        //         {
+        //           key: 'lint-config',
+        //           text: 'Vexip Lint Config',
+        //           link: 'https://github.com/vexip-ui/lint-config',
+        //         },
+        //       ],
+        //     },
+        //     {
+        //       key: 'partnership',
+        //       i18n: 'common.partnership',
+        //       items: [
+        //         {
+        //           key: 'fantastic-admin',
+        //           text: 'Fantastic-admin',
+        //           link: 'https://fantastic-admin.gitee.io/',
+        //         },
+        //         {
+        //           key: 'become-partner',
+        //           i18n: 'common.becomePartner',
+        //           link: 'mailto:544022268@qq.com',
+        //         },
+        //       ],
+        //     },
+        //   ],
+        // },
       ],
       outline: {
         '/guide/': 2,
         '/component/': 3,
       },
       editLink: {
-        pattern: 'https://github.com/vexip-ui/vexip-ui/edit/main/docs/:path',
+        pattern: 'https://github.com/appnify/arconify/edit/main/docs/:path',
       },
       footerLinks: [],
     },

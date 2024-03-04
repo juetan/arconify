@@ -1,11 +1,11 @@
-import { dirname, resolve } from 'node:path'
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 
-import { defineConfig } from 'vite'
-import vueJsx from '@vitejs/plugin-vue-jsx'
 import i18n from '@intlify/unplugin-vue-i18n/vite'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import autoprefixer from 'autoprefixer'
 import discardCss from 'postcss-discard-duplicates'
+import { defineConfig } from 'vite'
 import inspect from 'vite-plugin-inspect'
 import { demoImports } from './.vitepress/build/plugins/demo-imports'
 
@@ -15,12 +15,12 @@ const pkg = JSON.parse(readFileSync(resolve(__dirname, '../package.json'), 'utf-
 
 export default defineConfig(({ command }: ConfigEnv): any => {
   const isServe = command === 'serve'
-  const metaPath = resolve(__dirname, '../meta-data/contributors.json')
+  // const metaPath = resolve(__dirname, '../meta-data/contributors.json')
 
-  if (isServe && !existsSync(metaPath)) {
-    mkdirSync(dirname(metaPath))
-    writeFileSync(metaPath, '{}\n', 'utf-8')
-  }
+  // if (isServe && !existsSync(metaPath)) {
+  //   mkdirSync(dirname(metaPath))
+  //   writeFileSync(metaPath, '{}\n', 'utf-8')
+  // }
 
   return <UserConfigExport>{
     define: {

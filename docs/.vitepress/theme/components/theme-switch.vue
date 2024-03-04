@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue';
 
-import { Moon, Sun } from '@vexip-ui/icons'
-import { isClient } from '@vexip-ui/utils'
+import { Moon, Sun } from '@vexip-ui/icons';
+import { isClient } from '@vexip-ui/utils';
 
 const rootCls = isClient ? document.documentElement.classList : undefined
 const dark = ref(false)
@@ -19,8 +19,10 @@ function toggleDark(value: boolean) {
 
     if (value) {
       rootCls.add('dark')
+      document.body.setAttribute('arco-theme', 'dark')
     } else {
       rootCls.remove('dark')
+      document.body.setAttribute('arco-theme', 'light')
     }
 
     localStorage.setItem('vexip-docs-theme-prefer-dark', String(value))
