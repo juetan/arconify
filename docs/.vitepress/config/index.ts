@@ -21,7 +21,7 @@ export default async () => {
   const updated = await getUpdatedFiles()
 
   return defineConfigWithTheme<ThemeConfig>({
-    titleTemplate: 'Arconify',
+    titleTemplate: 'Arconify UI',
     lastUpdated: true,
     ignoreDeadLinks: true,
     head: getHeadConfig(),
@@ -43,13 +43,13 @@ export default async () => {
         {
           key: 'guides',
           i18n: 'common.guides',
-          link: '/guide/vexip-ui',
+          link: '/guide/intro',
           activeMatch: '/guide/',
         },
         {
           key: 'components',
           i18n: 'common.components',
-          link: '/component/button',
+          link: '/component/form',
           activeMatch: '/component/',
         },
         // {
@@ -250,19 +250,19 @@ function getFooterLinks(lang: 'zh-CN' | 'en-US'): ThemeConfig['footerLinks'] {
       items: [
         {
           text: 'GitHub',
-          link: 'https://github.com/appnify/arconify',
+          link: 'https://github.com/juetan/arconify',
         },
         {
           i18n: t('changelog'),
-          link: 'https://github.com//appnify/arconify/blob/main/CHANGELOG.md',
+          link: 'https://github.com/juetan/arconify/blob/main/CHANGELOG.md',
         },
         {
           i18n: t('issue'),
-          link: 'https://github.com//appnify/arconify/issues',
+          link: 'https://github.com/juetan/arconify/issues',
         },
         {
           i18n: t('contribute'),
-          link: 'https://github.com//appnify/arconify/blob/main/CONTRIBUTING.md',
+          link: 'https://github.com/juetan/arconify/blob/main/CONTRIBUTING.md',
         },
       ],
     },

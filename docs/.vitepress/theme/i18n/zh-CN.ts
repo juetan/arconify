@@ -181,6 +181,8 @@ export const zhCN = defineI18n({
     Renderer: '渲染器',
     ResizeObserver: '缩放观察',
     Scrollbar: '滚动条',
-    VirtualList: '虚拟列表'
+    VirtualList: '虚拟列表',
+
+    FormModal: '表单弹窗'
   }
 })

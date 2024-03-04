@@ -1,17 +1,15 @@
 <script setup lang="ts">
-import { computed, markRaw, onMounted, ref, watch, watchEffect } from 'vue'
-import { useI18n } from 'vue-i18n'
-
-import { Message } from 'vexip-ui'
-import { ChevronUp, Code, PaperPlaneR, PasteR, PenToSquareR } from '@vexip-ui/icons'
 import { useBEM } from '@vexip-ui/bem-helper'
 import { useIntersection } from '@vexip-ui/hooks'
+import { ChevronUp, Code, PasteR } from '@vexip-ui/icons'
 import { writeClipboard } from '@vexip-ui/utils'
 import { highlight, languages } from 'prismjs'
+import { Message } from 'vexip-ui'
+import { computed, markRaw, onMounted, ref, watch, watchEffect } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { transformPrefix } from '../common/demo-prefix'
 import { transformOrder } from '../common/demo-sfc-order'
 import { hashTarget } from '../common/hash-target'
-import { usePlayground } from '../common/playground'
 
 import type { RowExposed } from 'vexip-ui'
 
@@ -26,26 +24,26 @@ const extensionMap: Record<string, string> = {
   yml: 'yaml',
   styl: 'stylus',
   kt: 'kotlin',
-  rs: 'rust'
+  rs: 'rust',
 }
 
 const props = defineProps({
   src: {
     type: String,
-    default: ''
+    default: '',
   },
   demos: {
     type: Object,
-    default: () => ({})
+    default: () => ({}),
   },
   codes: {
     type: Object,
-    default: () => ({})
+    default: () => ({}),
   },
   alive: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 })
 
 const { t, locale } = useI18n({ useScope: 'global' })
@@ -71,7 +69,7 @@ if (!props.alive) {
     rootMargin: '200 0 200 0',
     handler: entry => {
       intersected.value = entry.isIntersecting
-    }
+    },
   })
 }
 
@@ -146,32 +144,10 @@ async function copyCodes() {
 function getCodeLang(extension: string) {
   return extensionMap[extension] ?? extension
 }
-
-const githubBaseUrl = 'https://github.com/vexip-ui/vexip-ui/blob/main/docs/'
-
-function editOnGithub() {
-  if (props.src) {
-    window.open(`${githubBaseUrl}/demos/${props.src}/demo.${locale.value}.vue`)
-  }
-}
-
-function editOnPlayground() {
-  // should use the original code
-  if (code.value) {
-    const { link } = usePlayground(code.value)
-
-    window.open(link)
-  }
-}
 </script>
 
 <template>
-  <Row
-    ref="wrapper"
-    tag="section"
-    :class="nh.b()"
-    :style="{ visibility: !intersected ? 'hidden' : undefined }"
-  >
+  <Row ref="wrapper" tag="section" :class="nh.b()" :style="{ visibility: !intersected ? 'hidden' : undefined }">
     <Column>
       <div :class="nh.be('example')">
         <NativeScroll
@@ -180,7 +156,7 @@ function editOnPlayground() {
           use-x-bar
           :scroll-style="{
             display: 'inline-block',
-            padding: '20px 12px 8px'
+            padding: '20px 12px 8px',
           }"
         >
           <ClientOnly>
@@ -206,11 +182,7 @@ function editOnPlayground() {
       <Tooltip reverse transfer>
         <template #trigger>
           <button type="button" :class="nh.be('action')">
-            <Icon
-              :scale="1.1"
-              :label="codeExpanded ? t('common.hideCode') : t('common.showCode')"
-              @click="expandCodes"
-            >
+            <Icon :scale="1.1" :label="codeExpanded ? t('common.hideCode') : t('common.showCode')" @click="expandCodes">
               <Code></Code>
             </Icon>
           </button>
@@ -222,11 +194,7 @@ function editOnPlayground() {
       <CollapseTransition>
         <Column v-show="codeExpanded" :class="nh.be('code')">
           <div :class="`language-vue`">
-            <pre
-              :class="`language-vue`"
-              :lang="'vue'"
-              tabindex="-1"
-            ><code ref="codeRef"></code></pre>
+            <pre :class="`language-vue`" :lang="'vue'" tabindex="-1"><code ref="codeRef"></code></pre>
             <span v-if="codeLines > 0" class="code-line-numbers">
               <span v-for="n in codeLines" :key="n"></span>
             </span>
@@ -234,12 +202,7 @@ function editOnPlayground() {
         </Column>
       </CollapseTransition>
       <Transition name="vxp-fade">
-        <button
-          v-show="codeExpanded"
-          type="button"
-          :class="nh.be('reduce')"
-          @click="expandCodes"
-        >
+        <button v-show="codeExpanded" type="button" :class="nh.be('reduce')" @click="expandCodes">
           <Icon><ChevronUp></ChevronUp></Icon>
           <span :class="nh.be('tip')">
             {{ t('common.hideCode') }}
@@ -426,10 +389,7 @@ function editOnPlayground() {
     margin-inline-end: -80px;
     white-space: nowrap;
     opacity: 0%;
-    transition:
-      margin var(--vxp-transition-base),
-      var(--vxp-transition-color),
-      var(--vxp-transition-opacity);
+    transition: margin var(--vxp-transition-base), var(--vxp-transition-color), var(--vxp-transition-opacity);
   }
 
   &__reduce:hover &__tip,

@@ -1,15 +1,13 @@
-import { readFileSync } from 'node:fs'
-import { resolve } from 'node:path'
-
 import i18n from '@intlify/unplugin-vue-i18n/vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import autoprefixer from 'autoprefixer'
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 import discardCss from 'postcss-discard-duplicates'
+import type { ConfigEnv, UserConfigExport } from 'vite'
 import { defineConfig } from 'vite'
 import inspect from 'vite-plugin-inspect'
 import { demoImports } from './.vitepress/build/plugins/demo-imports'
-
-import type { ConfigEnv, UserConfigExport } from 'vite'
 
 const pkg = JSON.parse(readFileSync(resolve(__dirname, '../package.json'), 'utf-8'))
 
@@ -42,11 +40,10 @@ export default defineConfig(({ command }: ConfigEnv): any => {
           find: /^@\/(.+)/,
           replacement: resolve(__dirname, '../$1'),
         },
-        // {
-        //   find: /^@vexip-ui\/(bem-helper|utils|hooks|config)/,
-        //   replacement: resolve(__dirname, '../common/$1/src')
-        // },
-        { find: /^arconify$/, replacement: resolve(__dirname, '../src/main.ts') },
+        {
+          find: /^arconify$/,
+          replacement: resolve(__dirname, '../src/main.ts'),
+        },
       ],
       dedupe: isServe ? ['../components', 'vue'] : ['vue'],
     },

@@ -13,7 +13,7 @@ export function getGuideConfig(): GuideGroup[] {
     {
       name: 'introduction',
       guides: [
-        { name: 'vexip-ui', i18n: 'vexipui' },
+        { name: 'intro', i18n: 'vexipui' },
         { name: 'getting-started', i18n: 'gettingStarted' },
       ]
     },

@@ -2,12 +2,9 @@
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import DemoPrefix from './demo-prefix.vue'
-import DemoSfcOrder from './demo-sfc-order.vue'
-import MajorColor from './major-color.vue'
-import Wave from './wave.vue'
-import { useRouter } from 'vitepress'
 import { useBEM } from '@vexip-ui/bem-helper'
+import { useRouter } from 'vitepress'
+import Wave from './wave.vue'
 
 const router = useRouter()
 const { t, locale } = useI18n({ useScope: 'global' })
@@ -20,17 +17,12 @@ const sign = ref<HTMLElement>()
 const waveTop = ref(494)
 
 function getStarted() {
-  router.go(`/${locale.value}/guide/vexip-ui`)
+  router.go(`/${locale.value}/guide/intro`)
 }
 
 function getComponents() {
-  router.go(`/${locale.value}/component/button`)
+  router.go(`/${locale.value}/component/form`)
 }
-
-function refreshWave() {
-  wave.value?.refresh()
-}
-
 </script>
 
 <template>
@@ -55,11 +47,68 @@ function refreshWave() {
           {{ t('common.getComponents') }}
         </Button>
       </div>
+      <div class="feature-list">
+        <div class="feature-item">
+          <h2 class="feature-title">⚡TypeScript支持</h2>
+          <p class="feature-desc">使用 TypeScript 构建，提供完善的类型支持，上手即是文档。</p>
+        </div>
+        <div class="feature-item">
+          <h2 class="feature-title">💎按需加载</h2>
+          <p class="feature-desc">使用 ESM 格式导入，将按需打包所用到的组件和样式。</p>
+        </div>
+        <div class="feature-item">
+          <h2 class="feature-title">📦Hook调用</h2>
+          <p class="feature-desc">一个 hook 完成所有增删改查逻辑，然后在需要的地方使用即可。</p>
+        </div>
+        <div class="feature-item">
+          <h2 class="feature-title">🎨组件透传</h2>
+          <p class="feature-desc">原有组件参数均可透传，且带有类型提示，满足一切自定义场景。</p>
+        </div>
+        <div class="feature-item">
+          <h2 class="feature-title">✨参数灵活</h2>
+          <p class="feature-desc">同一参数支持多种类型，根据需求选择合适的参数类型，灵活多变。</p>
+        </div>
+        <div class="feature-item">
+          <h2 class="feature-title">📋易于扩展</h2>
+          <p class="feature-desc">内置常见表单控件和表格功能，可自定义扩展满足开发需求。</p>
+        </div>
+      </div>
     </div>
   </section>
 </template>
 
 <style lang="scss">
+.feature-list {
+  text-align: left;
+  display: grid;
+  // grid-template-columns: repeat(3, 1fr);
+  padding: 0 20px;
+  gap: 20px;
+  max-width: 1100px;
+  margin-top: 98px;
+  .feature-item {
+    background-color: #f1f5f9;
+    border-radius: 4px;
+    padding: 12px 16px;
+  }
+  .feature-title {
+    margin: 0;
+    font-weight: normal;
+  }
+  .feature-desc {
+    margin: 4px;
+  }
+}
+.dark {
+  .feature-item {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+}
+@media (min-width: 1100px) {
+  .feature-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 .homepage {
   --wave-top: 494px;
 

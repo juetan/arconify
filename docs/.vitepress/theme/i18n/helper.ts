@@ -180,6 +180,7 @@ export interface I18nConfig {
     ResizeObserver: string,
     Scrollbar: string,
     VirtualList: string
+    FormModal: string
   }
 }
 

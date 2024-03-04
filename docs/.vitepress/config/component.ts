@@ -1,10 +1,10 @@
 export interface ComponentConfig {
-  name: string,
+  name: string
   since?: string
 }
 
 export interface ComponentGroup {
-  name: string,
+  name: string
   components: ComponentConfig[]
 }
 
@@ -13,8 +13,13 @@ export function getComponentConfig(): ComponentGroup[] {
     {
       name: 'basis',
       components: [
-        { name: 'Button' },
-      ]
+        {
+          name: 'Form',
+        },
+        {
+          name: 'FormModal',
+        },
+      ],
     },
   ]
 }
