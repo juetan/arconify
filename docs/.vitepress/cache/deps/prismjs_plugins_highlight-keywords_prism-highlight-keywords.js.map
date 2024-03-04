@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../node_modules/prismjs/plugins/highlight-keywords/prism-highlight-keywords.js"],
-  "sourcesContent": ["(function () {\n\n\tif (typeof Prism === 'undefined') {\n\t\treturn;\n\t}\n\n\tPrism.hooks.add('wrap', function (env) {\n\t\tif (env.type !== 'keyword') {\n\t\t\treturn;\n\t\t}\n\t\tenv.classes.push('keyword-' + env.content);\n\t});\n\n}());\n"],
-  "mappings": ";CAAC,WAAY;AAEZ,MAAI,OAAO,UAAU,aAAa;AACjC;AAAA,EACD;AAEA,QAAM,MAAM,IAAI,QAAQ,SAAU,KAAK;AACtC,QAAI,IAAI,SAAS,WAAW;AAC3B;AAAA,IACD;AACA,QAAI,QAAQ,KAAK,aAAa,IAAI,OAAO;AAAA,EAC1C,CAAC;AAEF,GAAE;",
-  "names": []
-}

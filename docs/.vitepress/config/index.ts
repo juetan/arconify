@@ -40,7 +40,12 @@ export default async () => {
     themeConfig: {
       asideMenus: {},
       nav: [
-        { key: 'guides', i18n: 'common.guides', link: '/guide/vexip-ui', activeMatch: '/guide/' },
+        {
+          key: 'guides',
+          i18n: 'common.guides',
+          link: '/guide/vexip-ui',
+          activeMatch: '/guide/',
+        },
         {
           key: 'components',
           i18n: 'common.components',
