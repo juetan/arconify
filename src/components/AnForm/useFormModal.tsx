@@ -5,7 +5,7 @@ import { useFormProps } from './useForm'
 import { FormItem } from './useFormItems'
 import { Recordable } from './util'
 
-export type FormModalUseOptions = Partial<Omit<AnFormModalProps, 'items'>> & {
+export type UseFormModalOptions = Partial<Omit<AnFormModalProps, 'items'>> & {
   /**
    * 表单项
    * @example
@@ -20,7 +20,7 @@ export type FormModalUseOptions = Partial<Omit<AnFormModalProps, 'items'>> & {
   items: FormItem[]
 }
 
-export function useFormModalProps(options: FormModalUseOptions): AnFormModalProps {
+export function useFormModalProps(options: UseFormModalOptions): AnFormModalProps {
   defaultsDeep(options, {
     trigger: true,
     modalProps: {
@@ -41,9 +41,9 @@ export function useFormModalProps(options: FormModalUseOptions): AnFormModalProp
   }
 }
 
-export type UseFormModalOptionsFn = (modalRef: Ref<AnFormModalInstance | null>) => FormModalUseOptions
+export type UseFormModalOptionsFn = (modalRef: Ref<AnFormModalInstance | null>) => UseFormModalOptions
 
-export function useAnFormModal(options: FormModalUseOptions | UseFormModalOptionsFn) {
+export function useFormModal(options: UseFormModalOptions | UseFormModalOptionsFn) {
   const modalRef = ref<AnFormModalInstance | null>(null)
   const formRef = computed(() => modalRef.value?.anFormRef)
   const open = (data: Recordable = {}) => modalRef.value?.open(data)

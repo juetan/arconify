@@ -1,10 +1,9 @@
 import { Form, FormInstance, Message } from '@arco-design/web-vue'
-import { useVModel } from '@vueuse/core'
 import { cloneDeep, isFunction, isObject, merge } from 'lodash-es'
 import { ComputedRef, InjectionKey, PropType, Ref, computed, defineComponent, onMounted, provide, ref } from 'vue'
 import { AnFormItem, AnFormItemProps } from './FormItem'
 import { SetterType, setterMap } from './setters'
-import { Recordable, getModel } from './util'
+import { Recordable, getModel, useVModel } from './util'
 
 const SUBMIT_ITEM = {
   field: 'id',
@@ -38,7 +37,8 @@ export const AnForm = defineComponent({
      * @example
      * ```ts
      * {
-     *   id: undefined
+     *   id: undefined,
+     *   name: undefined
      * }
      * ```
      */

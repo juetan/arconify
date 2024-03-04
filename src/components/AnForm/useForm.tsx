@@ -3,7 +3,7 @@ import { AnForm, AnFormInstance, AnFormProps } from './Form'
 import { FormItem, useFormItems } from './useFormItems'
 import { ref, reactive } from 'vue'
 
-export type FormUseOptions = Partial<Omit<AnFormProps, 'items'>> & {
+export type UseFormOptions = Partial<Omit<AnFormProps, 'items'>> & {
   /**
    * 表单项
    * @example
@@ -18,14 +18,14 @@ export type FormUseOptions = Partial<Omit<AnFormProps, 'items'>> & {
   items?: FormItem[]
 }
 
-export function useFormProps(options: FormUseOptions): Required<AnFormProps> {
-  const { model: _model = {}, items: _items = [], submit = () => null, formProps = {} } = options
+export function useFormProps(options: UseFormOptions): Required<AnFormProps> {
+  const { model: _model = {}, items: _items = [], submit, formProps = {} } = options
   const model = merge({ id: undefined }, _model)
   const items = useFormItems(_items ?? [], model)
   return {
     model,
     items,
-    submit,
+    submit: submit as any,
     formProps,
   }
 }
@@ -33,7 +33,7 @@ export function useFormProps(options: FormUseOptions): Required<AnFormProps> {
 /**
  * 构建表单组件的参数
  */
-export const useForm = (options: FormUseOptions) => {
+export const useForm = (options: UseFormOptions) => {
   const formRef = ref<AnFormInstance | null>(null)
   const props = reactive(useFormProps(options))
 

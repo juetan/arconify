@@ -1,0 +1,133 @@
+{
+  "hash": "331b0e14",
+  "configHash": "1915fe2d",
+  "lockfileHash": "69b2f346",
+  "browserHash": "99ffa295",
+  "optimized": {
+    "@vexip-ui/icons": {
+      "src": "../../../node_modules/@vexip-ui/icons/es/index.mjs",
+      "file": "@vexip-ui_icons.js",
+      "fileHash": "ae3c5f89",
+      "needsInterop": false
+    },
+    "vue": {
+      "src": "../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "f5ee03cf",
+      "needsInterop": false
+    },
+    "vitepress > @vue/devtools-api": {
+      "src": "../../../node_modules/@vue/devtools-api/lib/esm/index.js",
+      "file": "vitepress___@vue_devtools-api.js",
+      "fileHash": "45248073",
+      "needsInterop": false
+    },
+    "vitepress > @vueuse/core": {
+      "src": "../../../node_modules/@vueuse/core/index.mjs",
+      "file": "vitepress___@vueuse_core.js",
+      "fileHash": "dcac36ae",
+      "needsInterop": false
+    },
+    "vue-i18n": {
+      "src": "../../../node_modules/vue-i18n/dist/vue-i18n.mjs",
+      "file": "vue-i18n.js",
+      "fileHash": "6d439b77",
+      "needsInterop": false
+    },
+    "@vexip-ui/bem-helper": {
+      "src": "../../../node_modules/@vexip-ui/bem-helper/dist/index.mjs",
+      "file": "@vexip-ui_bem-helper.js",
+      "fileHash": "d1e052b9",
+      "needsInterop": false
+    },
+    "@vexip-ui/utils": {
+      "src": "../../../node_modules/@vexip-ui/utils/dist/index.mjs",
+      "file": "@vexip-ui_utils.js",
+      "fileHash": "73aff211",
+      "needsInterop": false
+    },
+    "@vexip-ui/hooks": {
+      "src": "../../../node_modules/@vexip-ui/hooks/dist/index.mjs",
+      "file": "@vexip-ui_hooks.js",
+      "fileHash": "c5eb7345",
+      "needsInterop": false
+    },
+    "@arco-design/web-vue": {
+      "src": "../../../../node_modules/.pnpm/@arco-design+web-vue@2.54.6_vue@3.4.21/node_modules/@arco-design/web-vue/es/index.js",
+      "file": "@arco-design_web-vue.js",
+      "fileHash": "189acdff",
+      "needsInterop": false
+    },
+    "lodash-es": {
+      "src": "../../../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/lodash.js",
+      "file": "lodash-es.js",
+      "fileHash": "9714a5e2",
+      "needsInterop": false
+    },
+    "fflate": {
+      "src": "../../../node_modules/fflate/esm/browser.js",
+      "file": "fflate.js",
+      "fileHash": "4d5814f0",
+      "needsInterop": false
+    },
+    "vexip-ui": {
+      "src": "../../../node_modules/vexip-ui/es/index.mjs",
+      "file": "vexip-ui.js",
+      "fileHash": "c86a4d32",
+      "needsInterop": false
+    },
+    "prismjs": {
+      "src": "../../../node_modules/prismjs/prism.js",
+      "file": "prismjs.js",
+      "fileHash": "0dcbc0df",
+      "needsInterop": true
+    },
+    "prismjs/plugins/highlight-keywords/prism-highlight-keywords": {
+      "src": "../../../node_modules/prismjs/plugins/highlight-keywords/prism-highlight-keywords.js",
+      "file": "prismjs_plugins_highlight-keywords_prism-highlight-keywords.js",
+      "fileHash": "a632aaef",
+      "needsInterop": true
+    },
+    "iconify-icon": {
+      "src": "../../../node_modules/iconify-icon/dist/iconify-icon.mjs",
+      "file": "iconify-icon.js",
+      "fileHash": "c345ed95",
+      "needsInterop": false
+    },
+    "@vexip-ui/config": {
+      "src": "../../../node_modules/@vexip-ui/config/dist/index.mjs",
+      "file": "@vexip-ui_config.js",
+      "fileHash": "01bf22da",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "menu-group-U2HI7RZ4": {
+      "file": "menu-group-U2HI7RZ4.js"
+    },
+    "chunk-QYGGJTQC": {
+      "file": "chunk-QYGGJTQC.js"
+    },
+    "chunk-FRKFMZA6": {
+      "file": "chunk-FRKFMZA6.js"
+    },
+    "chunk-W574J4SK": {
+      "file": "chunk-W574J4SK.js"
+    },
+    "chunk-NEZZFGIA": {
+      "file": "chunk-NEZZFGIA.js"
+    },
+    "chunk-CPGSQ24Y": {
+      "file": "chunk-CPGSQ24Y.js"
+    },
+    "chunk-UAOUAQDO": {
+      "file": "chunk-UAOUAQDO.js"
+    },
+    "chunk-IMLQGPPH": {
+      "file": "chunk-IMLQGPPH.js"
+    },
+    "chunk-LNEMQRCO": {
+      "file": "chunk-LNEMQRCO.js"
+    }
+  }
+}

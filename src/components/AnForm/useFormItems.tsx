@@ -66,8 +66,7 @@ export function useFormItems(items: FormItem[], model: Recordable) {
     target = merge(target, omit(item, ['required', 'rules', 'value', 'placeholder']))
 
     if (item.required || item.rules) {
-      const rules = useFormRules(item)!
-      target.rules = rules
+      target.rules = useFormRules(item)!
     }
 
     if (target.setterProps && has(item, 'placeholder')) {

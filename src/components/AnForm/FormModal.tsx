@@ -1,10 +1,9 @@
 import { Button, ButtonInstance, FormInstance, Message, Modal } from '@arco-design/web-vue'
-import { useVModel } from '@vueuse/core'
 import { cloneDeep } from 'lodash-es'
 import { InjectionKey, PropType, Ref, defineComponent, nextTick, provide, ref } from 'vue'
 import { AnForm, AnFormInstance, AnFormSubmit } from './Form'
 import { AnFormItemProps } from './FormItem'
-import { Recordable, getModel, setModel } from './util'
+import { Recordable, getModel, setModel, useVModel } from './util'
 
 export interface AnFormModalContext {
   visible: Ref<boolean>

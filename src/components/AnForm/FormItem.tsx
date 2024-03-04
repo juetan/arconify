@@ -131,6 +131,15 @@ export type AnFormItemSlots = {
 
 export type AnFormItemPropsBase = {
   /**
+   * 标签
+   * @example
+   * ```ts
+   * '昵称'
+   * ```
+   */
+  label?: string
+
+  /**
    * 字段名
    * @description 字段名唯一，支持特殊语法，如 `[startDate, endDate]`
    * @example
@@ -139,15 +148,6 @@ export type AnFormItemPropsBase = {
    * ```
    */
   field: string
-
-  /**
-   * 标签
-   * @example
-   * ```ts
-   * '昵称'
-   * ```
-   */
-  label?: string
 
   /**
    * 校验规则

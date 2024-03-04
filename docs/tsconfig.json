@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "allowJs": false,
+    "strict": true,
+    "jsx": "preserve",
+    "importHelpers": true,
+    "moduleResolution": "bundler",
+    "skipLibCheck": true,
+    "noUnusedLocals": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "outDir": "dist",
+    "types": ["vite/client"],
+    "paths": {
+      "@/*": ["../*"],
+      "@docs/*": ["./*"],
+      "@vexip-ui/*": ["../common/*/src"],
+      "arconify": ["../src/main.ts"]
+    },
+    "lib": ["esnext", "dom"]
+  },
+  "include": ["**/*", ".vitepress/**/*", "../types.d.ts"]
+}

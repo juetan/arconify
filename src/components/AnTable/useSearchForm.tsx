@@ -2,7 +2,7 @@ import { defaultsDeep, isArray, merge } from 'lodash-es'
 import type { Ref } from 'vue'
 import { AnFormProps } from '../AnForm/Form'
 import { AnFormItemProps } from '../AnForm/FormItem'
-import { FormUseOptions } from '../AnForm/useForm'
+import { UseFormOptions } from '../AnForm/useForm'
 import { FormItem, useFormItems } from '../AnForm/useFormItems'
 import { AnTableInstance } from './Table'
 
@@ -39,7 +39,7 @@ export type SearchFormItem = ExtendFormItem & {
   enterable?: boolean
 }
 
-export type SearchForm = Omit<FormUseOptions, 'items' | 'submit'> & {
+export type SearchForm = Omit<UseFormOptions, 'items' | 'submit'> & {
   /**
    * 搜索表单项
    * @example

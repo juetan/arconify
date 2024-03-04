@@ -86,6 +86,7 @@ function getModelObject(key: string, value: any, data: Recordable) {
 
 import { Modal, ModalConfig } from '@arco-design/web-vue'
 import { merge } from 'lodash-es'
+import { computed } from 'vue'
 
 export type DelOptions = string | Partial<Omit<ModalConfig, 'onOk' | 'onCancel'>>
 
@@ -109,5 +110,16 @@ export const delConfirm = (config: DelOptions = {}) => {
   const merged = merge({ content: '' }, delOptions, config)
   return new Promise<void>((onOk: () => void, onCancel) => {
     Modal.open({ ...merged, onOk, onCancel })
+  })
+}
+
+export const useVModel = (props: Recordable, key: string, emit: (e: any, val: any) => void) => {
+  return computed({
+    get() {
+      return props[key]
+    },
+    set(val: any) {
+      emit(`update:${key}`, val)
+    },
   })
 }
