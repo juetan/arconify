@@ -1,5 +1,4 @@
 import * as compiler from '@vue/compiler-sfc'
-
 import { defineConfigWithTheme } from 'vitepress'
 import { compare } from 'compare-versions'
 import { highlight } from '../build/highlight'
@@ -9,15 +8,14 @@ import { getGuideConfig } from './guide'
 import { getHeadConfig } from './head'
 import { getUpdatedFiles } from './updated'
 import { toKebabCase } from '@vexip-ui/utils'
-
 import type { AsideMenuTag, ThemeConfig } from '../theme/types'
 
 compiler.parseCache.max = 10000
 
 const SITE_DESC = 'A Vue 3 UI library, highly customizability, full TypeScript, performance pretty good.'
-const SITE_TITLE = 'Vexip UI - Make interesting in development'
+const SITE_TITLE = 'Arconify UI - Make interesting in development'
 const SITE_DESC_ZH = '一个 Vue 3 组件库，高度可定制化，全量 TypeScript，性能很不错。'
-const SITE_TITLE_ZH = 'Vexip UI - 创造有趣的开发体验'
+const SITE_TITLE_ZH = 'Arconify UI - 创造有趣的开发体验'
 
 export default async () => {
   const updated = await getUpdatedFiles()
