@@ -86,11 +86,15 @@
 :::demo table/ref
 :::
 
-### useTable 类型
+## useTable
 
 ```ts
-useTable(options: UseTableOptions | ((tableRef: AnTableInstance) => UseTableOptions)): TableReturn
+useTable(options: UseTableOptions | UseTableOptionsFn): TableReturn
 
+// 函数参数
+type UseTableOptionsFn = (tableRef: Ref<AnTableInstance | null>) => UseTableOptions
+
+// 返回对象
 interface TableReturn {
   // 组件名字
   name: string,
@@ -105,7 +109,7 @@ interface TableReturn {
 }
 ```
 
-### AnTableInstance 类型
+## AnTableInstance
 
 | 名称         | 类型                                | 说明                     | 默认值 | 始于 |
 | ------------ | ----------------------------------- | ------------------------ | ------ | ---- |
@@ -119,7 +123,7 @@ interface TableReturn {
 | `refresh`    | `() => Promise<void>`               | 刷新表格数据，不重置分页 |        | -    |
 | `reload`     | `() => Promise<void>`               | 刷新表格数据，重置分页   |        | -    |
 
-### UseTableOptions 属性
+## UseTableOptions
 
 | 名称         | 类型                                       | 说明                                                                         | 默认值 | 始于 |
 | ------------ | ------------------------------------------ | ---------------------------------------------------------------------------- | ------ | ---- |
@@ -134,7 +138,7 @@ interface TableReturn {
 | `tableProps` | `ArcoTableProps`                           | 传递给表格的参数，请查阅 [组件文档](https://arco.design/vue/component/table) |        | -    |
 | `tableSlots` | `ArcoTableSlots`                           | 传递给表格的插槽，请查阅 [组件文档](https://arco.design/vue/component/table) |        | -    |
 
-### UseTableColumn 类型
+## UseTableColumn
 
 | 名称      | 类型                                   | 说明                       | 默认值 | 始于 |
 | --------- | -------------------------------------- | -------------------------- | ------ | ---- |
@@ -142,7 +146,7 @@ interface TableReturn {
 | `visible` | `(column: TableColumnData) => boolean` | 是否可见                   |        | -    |
 | `buttons` | `Button[]`                             | 当 `type: 'button'` 时有效 |        | -    |
 
-### TableDataFn 类型
+## TableDataFn
 
 ```ts
 data(params: Params) => MaybePromise<TableData[] | { data: TableData[], total: number }>

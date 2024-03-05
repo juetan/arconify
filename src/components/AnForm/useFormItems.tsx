@@ -48,6 +48,7 @@ export type FormItem = Omit<AnFormItemPropsBase, 'rules'> &
 
 const ITEM: Partial<FormItem> = {
   setter: 'input',
+  setterProps: {},
 }
 
 export function useFormItems(items: FormItem[], model: Recordable) {
@@ -55,12 +56,10 @@ export function useFormItems(items: FormItem[], model: Recordable) {
 
   for (const item of items) {
     let target: AnFormItemProps = defaultsDeep({}, ITEM)
+    const setter = setterMap[item.setter ?? 'input']
 
-    if (!item.setter || typeof item.setter === 'string') {
-      const setter = setterMap[item.setter ?? 'input']
-      if (setter) {
-        defaultsDeep(target, { setterProps: setter.setterProps ?? {} })
-      }
+    if (setter) {
+      defaultsDeep(target, { setterProps: setter.setterProps ?? {} })
     }
 
     target = merge(target, omit(item, ['required', 'rules', 'value', 'placeholder']))
@@ -73,9 +72,7 @@ export function useFormItems(items: FormItem[], model: Recordable) {
       ;(target.setterProps as Recordable).placholder = item.placeholder
     }
 
-    if (!has(model, item.field)) {
-      model[item.field] = item.value
-    }
+    model[item.field] = has(item, 'value') ? item.value : model[item.field]
 
     data.push(target)
   }

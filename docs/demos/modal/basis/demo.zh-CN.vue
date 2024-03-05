@@ -3,7 +3,8 @@
     <UserForm></UserForm>
 
     <div>
-      表单值：{{ UserForm.formRef.value?.formRef?.model }}
+      <p>表单值：</p>
+      {{ UserForm.modalRef.value?.model }}
     </div>
   </div>
 </template>

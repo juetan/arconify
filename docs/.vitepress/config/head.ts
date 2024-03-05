@@ -21,6 +21,5 @@ export function getHeadConfig(): HeadConfig[] {
     ['meta', { 'http-equiv': 'Cache-control', content: 'no-store,no-cache,must-revalidate' }],
 
     ['script', {}, LANG_SCRIPT],
-    ['script', { async: 'true', src: 'https://www.googletagmanager.com/gtag/js?id=G-YDXQW4BVVX' }]
   ]
 }

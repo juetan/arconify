@@ -32,7 +32,6 @@ export function setModel(model: Recordable, data: Recordable) {
     }
     model[key] = data[key]
   }
-  console.log(model, data)
   return model
 }
 
@@ -95,12 +94,14 @@ export const delOptions: ModalConfig = {
   titleAlign: 'start',
   width: 432,
   content: '危险操作，确定删除该数据吗？',
-  maskClosable: false,
+  maskClosable: true,
   closable: false,
   okText: '确定删除',
   okButtonProps: {
     status: 'danger',
   },
+  renderToBody: false,
+  popupContainer: document.body
 }
 
 export const delConfirm = (config: DelOptions = {}) => {

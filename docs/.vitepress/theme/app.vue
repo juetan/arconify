@@ -1,48 +1,38 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
-
-import { useI18n } from 'vue-i18n'
-
-import { useData, useRoute } from 'vitepress'
-import { Message } from 'vexip-ui'
-import { Bars } from '@vexip-ui/icons'
 import { useBEM } from '@vexip-ui/bem-helper'
 import { useListener } from '@vexip-ui/hooks'
+import { Bars } from '@vexip-ui/icons'
 import { boundRange, isClient, multipleFixed, writeClipboard } from '@vexip-ui/utils'
-import { hashTarget } from './common/hash-target'
+import type { LayoutExposed, LayoutInnerClass, PropsOptions, ScrollbarExposed } from 'vexip-ui'
+import { Message } from 'vexip-ui'
+import { useData, useRoute } from 'vitepress'
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ensureStartingSlash, matchPath } from '../shared'
-
+import { hashTarget } from './common/hash-target'
+import Article from './components/article.vue'
+import AsideMenu from './components/aside-menu.vue'
+import HeaderNav from './components/header-nav.vue'
+import HeaderSign from './components/header-sign.vue'
+import HeaderSuffix from './components/header-suffix.vue'
 import Homepage from './components/homepage.vue'
 import NotFound from './components/not-found.vue'
-import Article from './components/article.vue'
-import DocSearch from './components/doc-search.vue'
-import HeaderSign from './components/header-sign.vue'
-import HeaderNav from './components/header-nav.vue'
-import HeaderSuffix from './components/header-suffix.vue'
-import AsideMenu from './components/aside-menu.vue'
-
-import type { LayoutExposed, LayoutInnerClass, PropsOptions, ScrollbarExposed } from 'vexip-ui'
 import type { ThemeConfig } from './types'
 
 const { theme, page, frontmatter } = useData<ThemeConfig>()
 const { t, locale } = useI18n({ useScope: 'global' })
-
 const route = useRoute()
-
 const nh = useBEM('docs-layout')
-
 const providedProps: PropsOptions = {
   default: { transfer: '#transfer-place' as any },
   masker: { transfer: true },
   modal: { transfer: true },
   drawer: { transfer: true },
-  imageViewer: { transfer: true }
+  imageViewer: { transfer: true },
 }
-
 const fixedSub = ref(false)
 const expanded = ref(false)
 const mounted = ref(false)
-
 const layout = ref<LayoutExposed>()
 
 const outline = computed(() => {
@@ -63,11 +53,7 @@ const outline = computed(() => {
 })
 
 const linkCenter = computed(() => {
-  return !!(
-    frontmatter.value.homepage ||
-    page.value.isNotFound ||
-    frontmatter.value.footer === false
-  )
+  return !!(frontmatter.value.homepage || page.value.isNotFound || frontmatter.value.footer === false)
 })
 
 const layoutClasses = computed(() => {
@@ -78,8 +64,8 @@ const layoutClasses = computed(() => {
     aside: nh.be('aside'),
     footer: {
       [nh.be('footer')]: true,
-      [nh.bem('footer', 'center')]: linkCenter.value
-    }
+      [nh.bem('footer', 'center')]: linkCenter.value,
+    },
   } as LayoutInnerClass
 })
 
@@ -91,8 +77,8 @@ const footerLinks = computed(() => {
       children: group.items!.map(item => ({
         name: item.text || t(item.i18n!),
         subname: item.subtext || (item.subI18n ? t(item.subI18n) : undefined),
-        to: item.link
-      }))
+        to: item.link,
+      })),
     }))
 })
 
@@ -104,7 +90,7 @@ watch(
   () => route.path,
   () => {
     requestAnimationFrame(refreshScroll)
-  }
+  },
 )
 watch(expanded, value => {
   if (!isClient) return
@@ -159,12 +145,7 @@ onMounted(() => {
   useListener<KeyboardEvent>(window, 'keydown', event => {
     const target = event.target as HTMLElement
 
-    if (
-      event.isTrusted &&
-      event.ctrlKey &&
-      event.code === 'KeyA' &&
-      target.matches('pre[class*="language-"]')
-    ) {
+    if (event.isTrusted && event.ctrlKey && event.code === 'KeyA' && target.matches('pre[class*="language-"]')) {
       const code = target.querySelector('code')
 
       if (!code) return
@@ -187,11 +168,7 @@ onMounted(() => {
 
 function computeBarLength() {
   barDisabled.value = document.documentElement.scrollHeight <= document.documentElement.clientHeight
-  barLength.value = boundRange(
-    (document.documentElement.clientHeight / (document.documentElement.scrollHeight || 1)) * 100,
-    5,
-    99
-  )
+  barLength.value = boundRange((document.documentElement.clientHeight / (document.documentElement.scrollHeight || 1)) * 100, 5, 99)
 }
 
 function handleScroll() {
@@ -260,7 +237,7 @@ function refreshScroll() {
     :inner-classes="layoutClasses"
     :style="{
       '--vxp-layout-aside-width': 'var(--aside-width)',
-      '--vxp-layout-header-height': 'var(--header-height)'
+      '--vxp-layout-header-height': 'var(--header-height)',
     }"
   >
     <template #sign>
@@ -280,11 +257,7 @@ function refreshScroll() {
       <header
         v-if="!frontmatter.homepage && !page.isNotFound"
         class="sub-header"
-        :style="
-          fixedSub
-            ? { position: 'fixed', top: '0', boxShadow: 'var(--vxp-shadow-light-2)' }
-            : undefined
-        "
+        :style="fixedSub ? { position: 'fixed', top: '0', boxShadow: 'var(--vxp-shadow-light-2)' } : undefined"
       >
         <Button class="sub-header__reduce" text @click="expanded = !expanded">
           <Icon :scale="1.4">
@@ -310,39 +283,24 @@ function refreshScroll() {
       <NotFound v-else-if="page.isNotFound"></NotFound>
       <template v-else>
         <ConfigProvider :props="providedProps">
-          <Article :anchor-level="outline">
+          <Article :anchor-level="2">
             <Content class="markdown" as="section"></Content>
           </Article>
         </ConfigProvider>
         <div id="transfer-place"></div>
       </template>
-      <Masker
-        v-model:active="expanded"
-        class="global-masker"
-        closable
-        :auto-remove="false"
-      ></Masker>
+      <Masker v-model:active="expanded" class="global-masker" closable :auto-remove="false"></Masker>
     </template>
 
     <template #footer-copyright>
       Made with ❤️ by
-      <Linker type="primary" to="https://github.com/vexip-ui">
-        JueTan
-      </Linker>
+      <Linker type="primary" to="https://github.com/juetan"> juetan </Linker>
       and contributors
     </template>
   </Layout>
 
   <teleport to="body">
-    <Scrollbar
-      v-show="!expanded"
-      ref="bar"
-      class="docs-scrollbar"
-      :disabled="barDisabled"
-      :bar-length="barLength"
-      wrapper="body"
-      @scroll="handleBarScroll"
-    ></Scrollbar>
+    <Scrollbar v-show="!expanded" ref="bar" class="docs-scrollbar" :disabled="barDisabled" :bar-length="barLength" wrapper="body" @scroll="handleBarScroll"></Scrollbar>
   </teleport>
 </template>
 

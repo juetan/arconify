@@ -1,10 +1,9 @@
+import type MarkdownIt from 'markdown-it'
 import anchor from 'markdown-it-anchor'
 import container from 'markdown-it-container'
 import tableSort from 'markdown-it-table-sort'
-
-import type MarkdownIt from 'markdown-it'
-import type Token from 'markdown-it/lib/token'
 import type StateCore from 'markdown-it/lib/rules_core/state_core'
+import type Token from 'markdown-it/lib/token'
 
 export function markdownItSetup(md: MarkdownIt) {
   md.use(anchor, { permalink: true, renderPermalink })
@@ -16,12 +15,7 @@ export function markdownItSetup(md: MarkdownIt) {
     .use(useTag)
 }
 
-function renderPermalink(
-  slug: string,
-  _opts: anchor.AnchorOptions,
-  state: StateCore,
-  index: number
-) {
+function renderPermalink(slug: string, _opts: anchor.AnchorOptions, state: StateCore, index: number) {
   const [startToken, contentToken] = state.tokens.slice(index, index + 2)
 
   startToken.attrs = [['class', 'anchor']]
@@ -34,19 +28,19 @@ function renderPermalink(
     Object.assign(new state.Token('', 'span', 1), {
       attrs: [
         ['id', id],
-        ['class', 'anchor__title']
-      ]
+        ['class', 'anchor__title'],
+      ],
     }),
     Object.assign(new state.Token('html_block', '', 0), { content: contentToken.content }),
     new state.Token('', 'span', -1),
     Object.assign(new state.Token('link_open', 'a', 1), {
       attrs: [
         ['class', 'anchor__link'],
-        ['href', `#${id}`]
-      ]
+        ['href', `#${id}`],
+      ],
     }),
     Object.assign(new state.Token('html_block', '', 0), { content: '#' }),
-    new state.Token('link_close', 'a', -1)
+    new state.Token('link_close', 'a', -1),
   ]
 }
 
@@ -74,7 +68,7 @@ function useContainer(md: MarkdownIt) {
     .use(container, 'v-pre', {
       render(tokens: Token[], index: number) {
         return tokens[index].nesting === 1 ? '<div v-pre>\n' : '</div>\n'
-      }
+      },
     })
     .use(...createDemoContainer())
 }
@@ -95,8 +89,8 @@ function createAlertContainer(type: string) {
         }
 
         return '</TipContainer>\n'
-      }
-    }
+      },
+    },
   ] as const
 }
 
@@ -119,8 +113,8 @@ function createDemoContainer() {
         } else {
           return '</Demo>\n'
         }
-      }
-    }
+      },
+    },
   ] as const
 }
 
@@ -141,17 +135,13 @@ function useTableWrapper(md: MarkdownIt) {
   const tableClose = md.renderer.rules.table_close
 
   md.renderer.rules.table_open = (tokens, idx, options, env, self) => {
-    const result = tableOpen
-      ? tableOpen(tokens, idx, options, env, self)
-      : self.renderToken(tokens, idx, options)
+    const result = tableOpen ? tableOpen(tokens, idx, options, env, self) : self.renderToken(tokens, idx, options)
 
     return '<div class="md-table">' + result
   }
 
   md.renderer.rules.table_close = (tokens, idx, options, env, self) => {
-    const result = tableClose
-      ? tableClose(tokens, idx, options, env, self)
-      : self.renderToken(tokens, idx, options)
+    const result = tableClose ? tableClose(tokens, idx, options, env, self) : self.renderToken(tokens, idx, options)
 
     return result + '</div>'
   }
@@ -163,7 +153,7 @@ function useTag(md: MarkdownIt) {
     // deprecated
     d: value => ['error', value || 'deprecated'],
     // since
-    s: value => ['warning', `Since v${value}`]
+    s: value => ['warning', `Since v${value}`],
   }
 
   md.inline.ruler.before('emphasis', 'tag', (state, silent) => {
@@ -182,7 +172,7 @@ function useTag(md: MarkdownIt) {
 
       ;[token.info, token.content] = shortcuts[key]?.(units[1]) ?? units
     } else if (units.length > 1) {
-      [token.info, token.content] = units
+      ;[token.info, token.content] = units
     } else {
       token.info = 'default'
       token.content = raw

@@ -58,7 +58,7 @@ export const AnFormModal = defineComponent({
      * ```
      */
     modalSlots: {
-      type: Object as PropType<{ title: any; footer: any }>,
+      type: Object as PropType<{ title?: any; footer?: any }>,
     },
     /**
      * 表单数据

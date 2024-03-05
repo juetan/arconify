@@ -11,7 +11,6 @@ import { getHeadConfig } from './head'
 import { getUpdatedFiles } from './updated'
 
 compiler.parseCache.max = 10000
-
 const SITE_DESC = 'A Vue 3 UI library, highly customizability, full TypeScript, performance pretty good.'
 const SITE_TITLE = 'Arconify UI - Make interesting in development'
 const SITE_DESC_ZH = '一个 Vue 3 组件库，高度可定制化，全量 TypeScript，性能很不错。'
@@ -52,49 +51,6 @@ export default async () => {
           link: '/component/form',
           activeMatch: '/component/',
         },
-        // {
-        //   key: 'ecosystem',
-        //   i18n: 'common.ecosystem',
-        //   items: [
-        //     {
-        //       key: 'official',
-        //       i18n: 'common.official',
-        //       items: [
-        //         {
-        //           key: 'create-vexip',
-        //           text: 'Create Vexip',
-        //           link: 'https://github.com/vexip-ui/create-vexip',
-        //         },
-        //         {
-        //           key: 'nuxt-module',
-        //           text: 'Vexip Nuxt Module',
-        //           link: 'https://github.com/vexip-ui/nuxt',
-        //         },
-        //         {
-        //           key: 'lint-config',
-        //           text: 'Vexip Lint Config',
-        //           link: 'https://github.com/vexip-ui/lint-config',
-        //         },
-        //       ],
-        //     },
-        //     {
-        //       key: 'partnership',
-        //       i18n: 'common.partnership',
-        //       items: [
-        //         {
-        //           key: 'fantastic-admin',
-        //           text: 'Fantastic-admin',
-        //           link: 'https://fantastic-admin.gitee.io/',
-        //         },
-        //         {
-        //           key: 'become-partner',
-        //           i18n: 'common.becomePartner',
-        //           link: 'mailto:544022268@qq.com',
-        //         },
-        //       ],
-        //     },
-        //   ],
-        // },
       ],
       outline: {
         '/guide/': 2,
@@ -234,14 +190,16 @@ function getFooterLinks(lang: 'zh-CN' | 'en-US'): ThemeConfig['footerLinks'] {
       i18n: t('resources'),
       items: [
         {
-          text: 'Starter Vue',
-          subI18n: '后台模板',
+          text: '管理后台',
           link: 'https://github.com/appnify/starter-vue',
         },
         {
-          text: 'JueTan Nav',
-          subI18n: '绝弹导航',
-          link: 'https://github.com/juetan/nav',
+          text: '前端导航',
+          link: 'https://nav.juetan.cn',
+        },
+        {
+          text: '绝弹博客',
+          link: 'https://www.juetan.cn',
         },
       ],
     },
@@ -249,7 +207,7 @@ function getFooterLinks(lang: 'zh-CN' | 'en-US'): ThemeConfig['footerLinks'] {
       i18n: t('help'),
       items: [
         {
-          text: 'GitHub',
+          text: '仓库地址',
           link: 'https://github.com/juetan/arconify',
         },
         {

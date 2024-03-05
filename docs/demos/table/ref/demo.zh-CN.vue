@@ -5,7 +5,8 @@
 </template>
 
 <script lang="tsx" setup>
-import { useTable } from 'arconify'
+import { Button } from '@arco-design/web-vue';
+import { useTable } from 'arconify';
 
 const UserTable = useTable(tableRef => {
   return {

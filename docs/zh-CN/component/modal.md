@@ -6,24 +6,24 @@
 
 通过 `useFormModal` 构建一个表单组件，继承 useForm 的参数，但添加了额外参数。其结果返回一个对象，该对象可以作为组件使用。默认情况下，包含一个触发弹窗的按钮。
 
-:::demo form-modal/basis
+:::demo modal/basis
 :::
 
 ## 触发元素
 
 通过 trigger 属性可以定义触发元素，默认为 true，可以接受 boolean | string | object | function 类型的参数。
 
-:::demo form-modal/trigger
+:::demo modal/trigger
 :::
 
 ## 参数透传
 
 通过 modalProps/modalSlots 属性可以传递参数给弹窗组件，除 visible 等部分参数外均可透传。
 
-:::demo form-modal/modal
+:::demo modal/modal
 :::
 
-### useFormModal 类型
+## useFormModal
 
 ```ts
 useFormModal(options: UseFormModalOptions | UseFormModalOptionsFn) => ModalReturn
@@ -44,7 +44,7 @@ interface ModalReturn {
 }
 ```
 
-### UseFormModalOptions 类型
+## UseFormModalOptions
 
 | 名称         | 类型                                                 | 说明                             | 默认值 | 始于 |
 | ------------ | ---------------------------------------------------- | -------------------------------- | ------ | ---- |

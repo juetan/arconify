@@ -47,7 +47,9 @@ export function ussTocAnchor(initLevel: 2 | 3 = 2, wrapper = ref<HTMLElement>())
           next.__anchor__ = true
         }
       }
-
+      if(!id) {
+        return;
+      }
       anchors.value.push({ id, name })
     })
   }

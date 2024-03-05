@@ -74,7 +74,6 @@ export interface AnButtonItem {
 }
 
 function useButtons(buttons: AnButtonItem[], tableRef: Ref<AnTableInstance | null>) {
-  console.log(tableRef)
   const result: Component[] = []
   for (const button of buttons) {
     if (button.render) {

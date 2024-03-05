@@ -1,13 +1,12 @@
-import Demo from './components/demo.vue'
+import type { App, Component } from 'vue'
 import AudioButton from './components/audio-button.vue'
-import IconDemo from './components/icon-demo.vue'
 import Contributors from './components/contributors.vue'
-import TipContainer from './components/tip-container.vue'
+import Demo from './components/demo.vue'
+import IconDemo from './components/icon-demo.vue'
+import IconifyDemo from './components/iconify-demo.vue'
 import InternalIcons from './components/internal-icons.vue'
 import InternalPrevIcons from './components/internal-prev-icons.vue'
-import IconifyDemo from './components/iconify-demo.vue'
-
-import type { App, Component } from 'vue'
+import TipContainer from './components/tip-container.vue'
 
 export const components: Record<string, Component> = {
   Demo,
