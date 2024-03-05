@@ -100,8 +100,6 @@ export const delOptions: ModalConfig = {
   okButtonProps: {
     status: 'danger',
   },
-  renderToBody: false,
-  popupContainer: document.body
 }
 
 export const delConfirm = (config: DelOptions = {}) => {
