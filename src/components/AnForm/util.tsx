@@ -39,7 +39,7 @@ export function setModel(model: Recordable, data: Recordable) {
 function rmString(str: string) {
   // @ts-ignore
   const field = str.replaceAll(/\s/g, '')
-  return field.match(/^(\{|\[)(.+)(\}|\])$/)?.[1] ?? ''
+  return field.match(/^(\{|\[)(.+)(\}|\])$/)?.[2] ?? ''
 }
 
 function setModelArray(data: Recordable, key: string) {

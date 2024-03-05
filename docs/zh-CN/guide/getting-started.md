@@ -1,6 +1,6 @@
 # 快速上手
 
-通过该章节，你将了解到如何快速开始使用 Arconify UI。在开始之前，你需要掌握了 [Vue3](https://v3.cn.vuejs.org/) 的基本使用。
+通过该章节，你将了解到如何快速开始使用 Arconify UI。在开始之前，希望你了解 [Vue3](https://v3.cn.vuejs.org/) 和 [@arco-design/web-vue]() 的基本使用。
 
 ## 要求
 

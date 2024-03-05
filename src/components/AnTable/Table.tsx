@@ -116,7 +116,7 @@ export const AnTable = defineComponent({
      * ```
      */
     columns: {
-      type: Array as PropType<TableColumnData[]>,
+      type: Array as PropType<(TableColumnData & { hide?: () => boolean })[]>,
       default: () => [],
     },
     /**
@@ -129,7 +129,7 @@ export const AnTable = defineComponent({
      * ```
      */
     paging: {
-      type: Object as PropType<PaginationProps & { hide?: boolean }>,
+      type: Object as PropType<PaginationProps & { hide?: () => boolean }>,
     },
     /**
      * 搜索表单
@@ -248,14 +248,6 @@ export const AnTable = defineComponent({
 
     onMounted(loadData)
 
-    const reload = () => {
-      return load(1, 10)
-    }
-
-    const refresh = () => {
-      return loadData()
-    }
-
     return {
       loading,
       renderData,
@@ -266,8 +258,8 @@ export const AnTable = defineComponent({
       createRef,
       modifyRef,
       load,
-      reload,
-      refresh,
+      reload: () => load(1, 10),
+      refresh: loadData,
     }
   },
   render() {
@@ -292,9 +284,9 @@ export const AnTable = defineComponent({
           {...this.tableProps}
           ref="tableRef"
           loading={this.loading}
-          pagination={this.paging?.hide ? false : this.paging}
+          pagination={this.paging?.hide?.() ? false : this.paging}
           data={this.renderData}
-          columns={this.columns}
+          columns={this.columns.filter(i => !Boolean(i.hide?.()))}
         >
           {{
             ...this.tableSlots,

@@ -161,7 +161,7 @@ export const AnForm = defineComponent({
   },
 })
 
-export type AnFormInstance = InstanceType<typeof AnForm>
+export type AnFormInstance = InstanceType<typeof AnForm> & {}
 
 export type AnFormProps = Pick<AnFormInstance['$props'], 'model' | 'items' | 'submit' | 'formProps'>
 

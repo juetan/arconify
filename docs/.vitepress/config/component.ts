@@ -17,7 +17,10 @@ export function getComponentConfig(): ComponentGroup[] {
           name: 'Form',
         },
         {
-          name: 'FormModal',
+          name: 'Modal',
+        },
+        {
+          name: 'Table',
         },
       ],
     },

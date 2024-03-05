@@ -40,8 +40,10 @@ export const useForm = (options: UseFormOptions) => {
   return {
     name: 'AnFormWrapper',
     formRef,
+    model: props.model,
     render() {
       return <AnForm ref={(el: any) => (formRef.value = el)} v-model:model={props.model} items={props.items} submit={props.submit} formProps={props.formProps}></AnForm>
     },
   }
 }
+

@@ -62,7 +62,18 @@ export interface UseTableOptions extends Pick<AnTableProps, 'data' | 'tableProps
   modify?: ModifyForm
 }
 
-function useButtons(buttons: any[], tableRef: Ref<AnTableInstance | null>) {
+export interface AnButtonItem {
+  text?: string
+  icon?: string
+  onClick?: () => void
+  visible?: () => boolean
+  disable?: () => boolean
+  render?: () => Element
+  buttonProps?: {}
+  buttonSlots?: {}
+}
+
+function useButtons(buttons: AnButtonItem[], tableRef: Ref<AnTableInstance | null>) {
   console.log(tableRef)
   const result: Component[] = []
   for (const button of buttons) {
@@ -90,7 +101,7 @@ function useButtons(buttons: any[], tableRef: Ref<AnTableInstance | null>) {
 export function useTableProps(options: UseTableOptions, tableRef: Ref<AnTableInstance | null>): AnTableProps {
   const { data, tableProps = {}, tableSlots } = options
 
-  const paging = { hide: false, showTotal: true, showPageSize: true, ...(options.paging ?? {}) }
+  const paging = { showTotal: true, showPageSize: true, ...(options.paging ?? {}) }
   const search = options.search && useSearchForm(options.search, [], tableRef)
   const create = options.create && useCreateForm(options.create)
   const modify = options.modify && useModifyForm(options, create?.model ?? {}, tableRef)

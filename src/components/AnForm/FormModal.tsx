@@ -243,6 +243,6 @@ export type AnFormModalTrigger =
       buttonSlots?: Recordable
     }
 
-export type AnFormModalInstance = InstanceType<typeof AnFormModal>
+export type AnFormModalInstance = InstanceType<typeof AnFormModal> & {}
 
 export type AnFormModalProps = Pick<AnFormModalInstance['$props'], 'trigger' | 'modalProps' | 'modalSlots' | 'model' | 'items' | 'submit' | 'formProps'>

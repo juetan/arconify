@@ -8,36 +8,28 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="tsx" setup>
 import { useFormModal } from 'arconify';
 
 const UserForm = useFormModal({
+  modalProps: {
+    title: '我是标题',
+    width: 580,
+    closable: true,
+  },
+  modalSlots: {
+    footer: () => {
+      return <div>
+        <div>我是 footer 插槽，我会替代 submit 参数生成的默认插槽</div>
+      </div>
+    }
+  },
   items: [
     {
       label: '名字',
       field: 'name',
       setter: 'input'
     },
-    {
-      label: '性别',
-      field: 'gender',
-      setter: 'select',
-      options: [
-        {
-          label: '男',
-          value: 1,
-        },
-        {
-          label: '女',
-          value: 0
-        }
-      ]
-    },
-    {
-      label: '备注',
-      field: 'description',
-      setter: 'textarea'
-    }
   ],
   submit(model) {
     console.log(model);
